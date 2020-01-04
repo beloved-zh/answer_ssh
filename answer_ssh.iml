@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="hibernate.cfg.xml" value="25bedb01-2a33-4612-b5e7-af987ed51ba0" />
+          <unit-entry name="hibernate.cfg01.xml" value="4b463fa8-47de-43fd-8575-533367d2339e" />
+          <unit-entry name="sessionFactory" value="b0bae5b5-a4bc-433a-9ac8-ac79673bc4d4" />
+        </datasource-map>
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resource/hibernate.cfg01.xml" />
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+      <facet type="Struts2" name="Struts 2">
+        <configuration>
+          <fileset id="s2fileset" name="My Fileset" removed="false">
+            <file>file://$MODULE_DIR$/src/main/resource/struts.xml</file>
+            <file>jar://E:/maven_repos/org/apache/struts/struts2-core/2.3.32/struts2-core-2.3.32.jar!/struts-default.xml</file>
+            <file>jar://E:/maven_repos/org/apache/struts/struts2-json-plugin/2.3.32/struts2-json-plugin-2.3.32.jar!/struts-plugin.xml</file>
+            <file>jar://E:/maven_repos/org/apache/struts/struts2-spring-plugin/2.3.15.1/struts2-spring-plugin-2.3.15.1.jar!/struts-plugin.xml</file>
+          </fileset>
+          <propertiesKeys disabled="false" />
+        </configuration>
+      </facet>
+    </facet>
+  </component>
+</module>

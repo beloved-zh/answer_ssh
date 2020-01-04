@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <!-- 开启动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <!-- 打开开发者模式		多点错误信息 -->
+    <constant name="struts.devMode" value="true"/>
+
+    <package name="pack" extends="json-default">
+
+        <action name="userAction_*" class="userAction" method="{1}">
+            <result name="login" type="json">
+                <param name = "root">b</param >
+            </result>
+        </action>
+        <action name="tCourseEntityAction_*" class="tCourseEntityAction" method="{1}">
+            <result name="findAll" type="json">
+                <param name = "root">list</param >
+            </result>
+        </action>
+        <action name="questionAction_*" class="questionAction" method="{1}">
+            <result name="findByNumberAndCourseNO" type="json">
+                <param name = "root">list</param >
+            </result>
+            <result name="userRecord" type="json">
+                <param name = "root">list</param >
+            </result>
+        </action>
+        <action name="statisticsAction_*" class="statisticsAction" method="{1}">
+            <result name="add" type="json">
+                <param name = "root"></param >
+            </result>
+            <result name="userRecord">/jsp/userRecord.jsp</result>
+        </action>
+
+    </package>
+</struts>

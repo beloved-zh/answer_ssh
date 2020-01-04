@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--  告诉spring容器去哪里加载jdbc.properties配置文件  -->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!-- 让spring创建c3p0-->
+    <bean name="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <!-- 将c3p0数据源配置给hibernate框架使用 -->
+        <property name="dataSource" ref="DataSource"></property>
+        <property name="hibernateProperties">
+            <props>
+                <!-- hibernate方言   让hibernate知道底层的数据库是什么-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!-- 三个可选参数  打印sql 格式化sql 自动创建表-->
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <!--加载映射文件-->
+        <property name="packagesToScan" value="com.zh.model" ></property>
+
+    </bean>
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- 组件扫描    修改 -->
+    <context:component-scan base-package="com.zh"/>
+
+    <!-- 引入spring提供的注解解析器 -->
+    <context:annotation-config/>
+
+    <!-- 支持事务注解 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--  将struts2的Action交给spring容器管理   scope="prototype"改为多例模式 -->
+    <bean name="userAction" class="com.zh.web.UserAction" scope="prototype">
+    </bean>
+    <bean name="tCourseEntityAction" class="com.zh.web.TCourseEntityAction" scope="prototype">
+    </bean>
+    <bean name="questionAction" class="com.zh.web.QuestionAction" scope="prototype">
+    </bean>
+    <bean name="statisticsAction" class="com.zh.web.StatisticsAction" scope="prototype">
+    </bean>
+
+</beans>
